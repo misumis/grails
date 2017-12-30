@@ -1,4 +1,5 @@
 #main-navbar{
+  border:none;
   height: 200px;
   background-color: @mainColor;
   width:100%;
@@ -6,36 +7,59 @@
   -moz-border-radius: 0;
   border-radius: 0;
   overflow: hidden;
+  margin-bottom: 0;
   .framework{
-      position: absolute;
-      top:20px;
-      right:20px;
-      transform: rotate(-10deg);
-      opacity:0.1;
-      padding-left:65px;
-      line-height: 200px;
-      max-height: 300px;
+    position: absolute;
+    top:20px;
+    right:20px;
+    transform: rotate(-10deg);
+    opacity:0.1;
+    padding-left:65px;
+    line-height: 200px;
+    max-height: 300px;
     max-width:300px;
     z-index:0;
   }
   .logo-wrapper{
-    display: block;
-    z-index: 2;
+    display: inline-block;
     .logo{
       display: flex;
-      align-items: center;
+      align-content:center;
+      justify-content: flex-start;
       height:200px;
-      z-index: 2;
+      padding-left:60px;
       a{
-        z-index: 999;
-        .logo-img {
-          padding-left: 65px;
-          width: 200px;
-
-        }
+        display: flex;
+        align-items: center;
+      }
+      .logo-img{
+        line-height:200px;
+        height: 60px;
       }
 
-
+    }
+  }
+  .menu{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height:200px;
+    padding-right:60px;
+    &-link{
+      font-size:2.0rem;
+      padding: 20px 40px;
+      color: #FFFFFF;
+      display: block;
+      width: auto;
+      -webkit-transition: background 0.3s ease-in-out;
+      -moz-transition: background 0.3s ease-in-out;
+      -ms-transition: background 0.3s ease-in-out;
+      -o-transition: background 0.3s ease-in-out;
+      transition: background 0.3s ease-in-out;
+      &:hover{
+        background:@menuHover;
+        text-decoration: none;
+      }
     }
   }
 
@@ -43,9 +67,11 @@
 
 h2{
   font-size:30px;
+  font-weight:700;
   position: relative;
   display: block !important;
   padding-bottom:10px;
+  margin-top:30px;
   margin-bottom:30px;
   span{
     text-transform: uppercase;
@@ -67,7 +93,7 @@ h2{
     bottom: 0;
     left: 0;
     width: 170px;
-    border-bottom: 1px solid #002749;
+    border-bottom: 1px solid @mainColor;
     z-index: 1;
   }
 

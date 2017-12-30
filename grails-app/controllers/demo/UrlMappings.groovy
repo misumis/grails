@@ -9,7 +9,9 @@ class UrlMappings {
             }
         }
 
-        '/'(view: '/index')
+        '/'(controller: 'article', action: 'index')
+        '/protected'(controller: 'article', action: 'protectedIndex')
+        '/home'(view: '/index')
         '500'(view: '/error')
         '404'(view: '/notFound')
     }

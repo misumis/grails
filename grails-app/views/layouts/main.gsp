@@ -7,20 +7,26 @@
         <g:layoutTitle default="Grails"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
+    <asset:javascript src="application.js"></asset:javascript>
+    <asset:javascript src="trumbowyg.js"></asset:javascript>
     <asset:stylesheet src="main.css"/>
+    <asset:stylesheet src="trumbowyg.css"/>
 
     <g:layoutHead/>
 </head>
 <body>
 
     <div class="navbar" id="main-navbar">
-        <div class="logo-wrapper">
+        <div class="logo-wrapper col-md-3">
             <div class="logo">
                 <a href="/"><asset:image src="enuai_inv.svg" class="logo-img"/></a>
             </div>
         </div>
+
         <asset:image src="grails.svg" class="framework"/>
+        <div class="menu col-md-9">
+            <g:link action="protectedIndex" controller="article" class="login-link menu-link" >Login</g:link>
+        </div>
     </div>
     <div class="container-fluid">
         <g:layoutBody/>

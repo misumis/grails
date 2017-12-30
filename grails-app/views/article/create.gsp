@@ -6,15 +6,8 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-article" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="create-article" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <h2><g:message code="default.create.label" args="[entityName]" /></h2>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -27,10 +20,18 @@
             </g:hasErrors>
             <g:form action="save">
                 <fieldset class="form">
-                    <f:all bean="article" except="featuredImageBytes,featuredImageContentType"/>
+                    <label for="title" >Title</label>
+                    <g:textField class="article_input" name="title" value="${this.article?.title}"/>
+                    <label for="teaser" >Teaser</label>
+                    <g:textField class="article_input" name="teaser" value="${this.article?.teaser}"/>
+                    <label for="text" >Text</label>
+                    <g:textArea class="" id="editor" name="text" value="${this.article?.text}"/>
+                    <label for="author" >Author</label>
+                    <g:textField class="article_input" name="author" value="${this.article?.author}"/>
+
                 </fieldset>
                 <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                    <g:submitButton name="create" class="save btn btn-default btn-submit" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
             </g:form>
         </div>

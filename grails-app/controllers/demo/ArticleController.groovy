@@ -1,5 +1,7 @@
 package demo
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
@@ -34,6 +36,7 @@ class ArticleController {
     // end::featuredImage[]
 
     // tag::editFeaturedImage[]
+    @Secured(value=["hasRole('ROLE_ADMIN')"])
     @Transactional(readOnly = true)
     def editFeaturedImage(Article article) {
         respond article
@@ -52,6 +55,7 @@ class ArticleController {
     // end::index[]
 
     // tag::show[]
+
     @Transactional(readOnly = true)
     def show(Article article) {
         respond article
@@ -60,6 +64,7 @@ class ArticleController {
     // end::show[]
 
     // tag::create[]
+    @Secured(value=["hasRole('ROLE_ADMIN')"])
     @SuppressWarnings(['GrailsMassAssignment', 'FactoryMethodName'])
     @Transactional(readOnly = true)
     def create() {
@@ -69,6 +74,7 @@ class ArticleController {
     // end::create[]
 
     // tag::edit[]
+    @Secured(value=["hasRole('ROLE_ADMIN')"])
     @Transactional(readOnly = true)
     def edit(Article article) {
         respond article
@@ -77,6 +83,7 @@ class ArticleController {
     // end::edit[]
 
     // tag::uploadFeaturedImage[]
+    @Secured(value=["hasRole('ROLE_ADMIN')"])
     def uploadFeaturedImage(FeaturedImageCommand cmd) {
         if (cmd == null) {
             notFound()
@@ -103,7 +110,7 @@ class ArticleController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'article.label', default: 'Article'), article.id])
-                redirect article
+                redirect (controller: 'article', action: 'protectedIndex')
             }
             '*' { respond article, [status: OK] }
         }
@@ -112,6 +119,7 @@ class ArticleController {
     // end::uploadFeaturedImage[]
 
     // tag::save[]
+    @Secured(value=["hasRole('ROLE_ADMIN')"])
     def save(NameCommand cmd) {
         if (cmd == null) {
             notFound()
@@ -138,7 +146,7 @@ class ArticleController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'article.label', default: 'Article'), article.id])
-                redirect article
+                redirect (controller: 'article', action: 'protectedIndex')
             }
             '*' { respond article, [status: CREATED] }
         }
@@ -147,6 +155,7 @@ class ArticleController {
     // end::save[]
 
     // tag::update[]
+    @Secured(value=["hasRole('ROLE_ADMIN')"])
     def update(NameUpdateCommand cmd) {
         if (cmd == null) {
             notFound()
@@ -173,7 +182,7 @@ class ArticleController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'article.label', default: 'Article'), article.id])
-                redirect article
+                redirect (controller: 'article', action: 'protectedIndex')
             }
             '*' { respond article, [status: OK] }
         }
@@ -182,6 +191,7 @@ class ArticleController {
     // end::update[]
 
     // tag::delete[]
+    @Secured(value=["hasRole('ROLE_ADMIN')"])
     def delete() {
 
         Long articleId = params.long('id')
@@ -203,6 +213,16 @@ class ArticleController {
     }
 
     // end::delete[]
+
+    // tag::protectedIndex[]
+    @Transactional(readOnly = true)
+    @Secured(value=["hasRole('ROLE_ADMIN')"])
+    def protectedIndex(Integer max){
+        params.max = Math.min(max ?: 10, 100)
+        def (l, total) = articleGormService.list(params)
+        respond l, model:[articleCount: total]
+    }
+    // end::protectedIndex[]
 
     // tag::notFound[]
     protected void notFound() {

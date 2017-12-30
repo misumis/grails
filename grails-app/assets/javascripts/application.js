@@ -19,3 +19,33 @@ if (typeof jQuery !== 'undefined') {
         });
     })(jQuery);
 }
+$(document).ready(function () {
+    $('#editor').trumbowyg({
+
+    });
+
+    $('#title').on('keydown keyup' , function () {
+        $('.counter-title').detach();
+        var count = $('#title').val().length;
+        var counter = "<p class='counter-title'>" + count + " / 50 " + " </p>"
+        $(counter).appendTo("#title_field");
+        if(count > 50){
+            $('.counter-title').css({"color": "red"});
+        }
+        else{
+            $('.counter-title').css({"color": "black"});
+        }
+    })
+    $('#teaser').on('keydown keyup' , function () {
+        $('.counter-teaser').detach();
+        var count = $('#teaser').val().length;
+        var counter = "<p class='counter-teaser'>" + count + " / 180 " + " </p>"
+        $(counter).appendTo("#teaser_field");
+        if(count > 180){
+            $('.counter-teaser').css({"color": "red"});
+        }
+        else{
+            $('.counter-teaser').css({"color": "black"});
+        }
+    })
+})

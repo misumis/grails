@@ -10,15 +10,13 @@ dd.error{
   &-wrapper{
     display: inline-block;
     padding: 0 15px;
-    min-width:25%;
+    display: flex;
     .article-inner{
-
+      width: 100%;
       min-height:200px;
       padding:  0 0 20px;
       text-align: center;
       background: @white;
-      //border:1px solid #313131;
-      //box-shadow: 1px 1px 5px #313131;
       margin-bottom:30px;
       &-img {
 
@@ -69,15 +67,21 @@ dd.error{
     border: none;
     border-bottom: 2px solid @almostBlack;
     font-size: 1.4rem;
+
     color: #373435;
     margin: 30px 0 10px;
     &:focus, &:active {
       outline: 2px solid @almostBlack;
     }
   }
+  &-teaser{
+      font-size:26px;
+      line-height:1.5;
+  }
   &-text{
     margin: 40px 0;
-    font-size:16px;
+    font-size:18px;
+    line-height:1.5;
     &-author{
       font-weight:700;
       margin:40px 0;
@@ -96,7 +100,7 @@ dd.error{
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  background: #17466c;
+  background: @mainColor;
   text-align: center;
   border: none;
   transition: all 0.3s;
@@ -104,6 +108,9 @@ dd.error{
   font-weight:700;
   &:hover{
     color:white;
-    background: #002749;
+    background: @links;
   }
+}
+.news{
+
 }
